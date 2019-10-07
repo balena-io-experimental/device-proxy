@@ -9,9 +9,9 @@ RUN mkdir -p "${GOPATH}/src/github.com/nadoo/" \
  && git checkout -b build "${GLIDER_VERSION}" \
  && GO111MODULE=on go get -v .
 
-FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-golang:run
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine:3.10
 
-COPY --from=build "${GOPATH}/bin/glider" "${GOPATH}/bin/glider"
+COPY --from=build "/go/bin/glider" "/usr/bin/glider"
 WORKDIR /usr/src/app
 COPY *.conf ./
 COPY start.sh ./
