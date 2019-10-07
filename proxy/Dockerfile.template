@@ -1,0 +1,20 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-golang:build as build
+
+# This value is a tag or a git commit hash
+ENV GLIDER_VERSION=6131a2de65daa74d7782da9ac89bf0fa6d43e45c
+RUN mkdir -p "${GOPATH}/src/github.com/nadoo/" \
+ && cd "${GOPATH}/src/github.com/nadoo/" \
+ && git clone https://github.com/nadoo/glider.git \
+ && cd glider \
+ && git checkout -b build "${GLIDER_VERSION}" \
+ && GO111MODULE=on go get -v .
+
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-golang:run
+
+COPY --from=build "${GOPATH}/bin/glider" "${GOPATH}/bin/glider"
+WORKDIR /usr/src/app
+COPY *.conf ./
+COPY *.rule ./
+COPY start.sh ./
+
+CMD ["bash", "start.sh"]

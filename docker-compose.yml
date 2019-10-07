@@ -1,0 +1,13 @@
+version: '2.1'
+services:
+  # An example server
+  some_server:
+    build: ./some_server
+    ports:
+      - "80"
+
+  # Optional proxy service
+  proxy:
+    build: ./proxy
+    ports:
+      - "1080"
