@@ -14,7 +14,6 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-golang:run
 COPY --from=build "${GOPATH}/bin/glider" "${GOPATH}/bin/glider"
 WORKDIR /usr/src/app
 COPY *.conf ./
-COPY *.rule ./
 COPY start.sh ./
 
 CMD ["bash", "start.sh"]
