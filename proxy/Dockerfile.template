@@ -1,7 +1,7 @@
 FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-golang:build as build
 
 # This value is a tag or a git commit hash
-ENV GLIDER_VERSION=6131a2de65daa74d7782da9ac89bf0fa6d43e45c
+ENV GLIDER_VERSION=ef2d3cd07f633f78c70b3155e9544277f29b2597
 RUN mkdir -p "${GOPATH}/src/github.com/nadoo/" \
  && cd "${GOPATH}/src/github.com/nadoo/" \
  && git clone https://github.com/nadoo/glider.git \
