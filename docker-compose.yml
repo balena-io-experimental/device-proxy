@@ -10,4 +10,9 @@ services:
   proxy:
     build: ./proxy
     ports:
-      - "1080"
+      # ntp server
+      - "123/udp"
+      # socks5 proxy
+      - "1080/tcp"
+      # dns proxy
+      - "5300/udp"

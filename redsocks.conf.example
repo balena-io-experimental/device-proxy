@@ -8,6 +8,6 @@ base {
 
 redsocks {
  type = socks5;
- ip = "otherdevice.local";
+ ip = "x.y.z.w";
  port = 1080;
 }
