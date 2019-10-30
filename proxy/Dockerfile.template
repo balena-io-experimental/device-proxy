@@ -9,11 +9,18 @@ RUN mkdir -p "${GOPATH}/src/github.com/nadoo/" \
  && git checkout -b build "${GLIDER_VERSION}" \
  && GO111MODULE=on go get -v .
 
-FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine:3.10
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine:run
 
+# Proxy server
 COPY --from=build "/go/bin/glider" "/usr/bin/glider"
 WORKDIR /usr/src/app
-COPY *.conf ./
+COPY glider.conf ./
+
+# NTP server
+RUN install_packages chrony
+COPY chrony.conf /etc/chrony.conf
+
+# Start script
 COPY start.sh ./
 
 CMD ["bash", "start.sh"]
