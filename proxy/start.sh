@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 
 if [ -n "${START_PROXY}" ]; then
-    echo "Starting proxy service as START_PROXY was set "
+    echo "Starting proxy & NTP server services as START_PROXY was set "
     glider_extra=()
     if [ -n "$VERBOSE" ]; then
         glider_extra+=('-verbose')
     fi
-    glider -config glider.conf "${glider_extra[@]}"
+    # starting ntp server (without controlling the system clock)
+    chronyd -f "$(pwd)/chrony.conf" -x
+    # Starting proxy
+    glider -config  "$(pwd)/glider.conf" "${glider_extra[@]}"
 else
     # No proxy requested, just idle, and send reminders every now and again.
     while : ; do
