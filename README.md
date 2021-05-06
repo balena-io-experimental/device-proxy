@@ -1,3 +1,5 @@
+# The project is archived - you can find a maintained replacement here: https://github.com/balenalabs/proxy-tunnel
+
 # Device proxy demo
 
 ⚠️ _This project is Work in Progress, please test whether it works for your use case, and if any issue found, feed back to us, e.g. by opening an issue._ ⚠️
